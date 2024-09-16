@@ -19,6 +19,20 @@
 <link rel="stylesheet" href="/css/default-dark.css" />
 {{ end }}
 
+{{- /*
+  Inject optional CSS overrides. In hugo.toml, add paths relative to the
+  `static/` directory:
+  ```
+  [params]
+    custom_css = ["css/foo.css", "css/bar.css"]
+  ```
+  Follows the pattern at
+  https://discourse.gohugo.io/t/how-to-override-css-classes-with-hugo/3033/4
+*/ -}}
+{{ range .Site.Params.custom_css -}}
+<link rel="stylesheet" href="{{ . | absURL }}">
+{{- end }}
+
 {{ template "_internal/google_analytics.html" . }}
 
 <title>
